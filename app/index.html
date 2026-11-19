@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GTA VI Trophy Guide &amp; Platinum Tracker — Leonida Ledger</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23d24e2a'/%3E%3Ctext x='16' y='23' font-size='20' font-family='Georgia,serif' font-weight='bold' text-anchor='middle' fill='white'%3EL%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>LEONIDA LEDGER</h1>
+    <p class="sub">GTA VI trophy guide &amp; platinum tracker — 55 trophies · 1 platinum · 2 gold · 6 silver · 46 bronze</p>
+  </div>
+  <div class="progress" id="progressBox">
+    <div class="big"><span id="earnedCount">0</span><span class="of">/ 55</span></div>
+    <div class="bar"><div id="barFill"></div></div>
+    <p id="progressText">0% to Platinum — 55 to go</p>
+  </div>
+</header>
+<nav class="tabs" id="tabs">
+  <button type="button" data-view="tracker" class="active">Tracker</button>
+  <button type="button" data-view="roadmap">Roadmap to Platinum</button>
+  <button type="button" data-view="missable">Missable trophies</button>
+  <button type="button" data-view="settings">Settings &amp; data</button>
+</nav>
+
+<section id="view-tracker" class="view">
+  <div class="toolbar">
+    <input id="search" type="search" placeholder="Search a trophy…" aria-label="Search trophies">
+    <label>Grade <select id="grade"><option value="all">All grades</option><option value="platinum">Platinum</option><option value="gold">Gold</option><option value="silver">Silver</option><option value="bronze">Bronze</option></select></label>
+    <label>Kind <select id="kind"><option value="all">All kinds</option><option value="story">Story</option><option value="activities">Activities</option><option value="collectibles">Collectibles</option><option value="combat">Combat</option><option value="partner">Partner</option><option value="money">Money</option><option value="secrets">Secrets</option><option value="completion">100% completion</option><option value="platinum">Platinum</option></select></label>
+    <label>Status <select id="status"><option value="all">All</option><option value="earned">Earned</option><option value="todo">Not yet earned</option></select></label>
+    <label class="check"><input id="missableOnly" type="checkbox"> Missable only</label>
+    <label class="check" title="Hides the names and descriptions of story trophies until they are earned"><input id="spoiler" type="checkbox"> Spoiler-safe</label>
+  </div>
+  <p class="countline" id="countLine"></p>
+  <div class="split">
+    <ul class="list" id="list"></ul>
+    <aside class="detail" id="detail" aria-live="polite"></aside>
+  </div>
+</section>
+
+<section id="view-roadmap" class="view" hidden>
+  <h2>Roadmap to the Platinum</h2>
+  <p class="note">Built from the official trophy descriptions only. Story first, then strangers and partners, then activities and combat, then collectibles and cleanup. Chapter trophies can never be missed — missions can be replayed.</p>
+  <div id="roadmap"></div>
+</section>
+
+<section id="view-missable" class="view" hidden>
+  <h2>Missable trophies — do these before the story ends</h2>
+  <p class="note">These flags are our reading of the official descriptions, not yet confirmed in-game: the game released 19 Nov 2026. Story missions can be replayed, so chapter trophies are <strong>not</strong> missable — but partner moments and one-off stunts may not come back.</p>
+  <ul class="list wide" id="missableList"></ul>
+</section>
+
+<section id="view-settings" class="view" hidden>
+  <h2>Settings &amp; data</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>Spoiler-safe mode</h3>
+      <p>When on, story trophies you have not earned yet show as “??? — hidden story trophy” instead of their name and description. Earned trophies always show in full.</p>
+      <label class="check"><input id="spoiler2" type="checkbox"> Hide un-earned story trophies</label>
+    </div>
+    <div class="card">
+      <h3>Save &amp; share your progress</h3>
+      <p>Progress is saved in this browser (localStorage) as you tick trophies. Export a JSON backup, or import one to restore it on another device.</p>
+      <p><button id="export" type="button">Export progress (.json)</button>
+      <label class="import">Import progress <input id="import" type="file" accept="application/json,.json"></label></p>
+      <p><button id="reset" type="button">Reset all progress</button></p>
+      <p id="saveMsg" class="muted"></p>
+    </div>
+    <div class="card">
+      <h3>Where the data comes from</h3>
+      <p>Official names, descriptions and grades: the PlayStation list as published on <a href="https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/">Exophase</a>, cross-checked against <a href="https://psnprofiles.com/trophies/43531-grand-theft-auto-vi">PSNProfiles</a> (frozen 18 Nov 2026, verified live 19 Nov 2026 — the two agree on all 55). PSN progress counts (e.g. 42 Shooting Range challenges, 250 stunts) come from PSNProfiles. Every guide is written in our own words for this entry and cites its sources beside it. No Rockstar logo or artwork is used; the look is our own. The app works fully offline — it fetches nothing.</p>
+      <p class="muted">“T**s Ass Drug Money” is shown as PlayStation publishes it.</p>
+    </div>
+  </div>
+</section>
+
+<footer><p>Leonida Ledger — an unofficial, open-source fan guide. Grand Theft Auto and GTA are trademarks of Take-Two Interactive; this guide is not affiliated with Rockstar Games. Trophy names and descriptions are shown as PlayStation publishes them. MIT licensed.</p></footer>
+<script type="module" src="app.js"></script>
+</body>
+</html>
