@@ -1,84 +1,95 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GTA VI Trophy Guide &amp; Platinum Tracker — Leonida Ledger</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23d24e2a'/%3E%3Ctext x='16' y='23' font-size='20' font-family='Georgia,serif' font-weight='bold' text-anchor='middle' fill='white'%3EL%3C/text%3E%3C/svg%3E">
+<title>Vice Atlas — GTA VI Platinum Guide &amp; Tracker</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23ff4d8d'/%3E%3Ctext x='16' y='22' font-size='17' text-anchor='middle' fill='%23140b1e' font-family='Georgia' font-weight='bold'%3EV%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header class="top">
-  <div>
-    <h1>LEONIDA LEDGER</h1>
-    <p class="sub">GTA VI trophy guide &amp; platinum tracker — 55 trophies · 1 platinum · 2 gold · 6 silver · 46 bronze</p>
+  <div class="brand">
+    <div class="mark">V</div>
+    <div>
+      <h1>Vice Atlas</h1>
+      <p class="sub">GTA VI &middot; Platinum Guide &amp; Tracker &middot; 55 trophies &middot; 1 platinum / 2 gold / 6 silver / 46 bronze</p>
+    </div>
   </div>
-  <div class="progress" id="progressBox">
-    <div class="big"><span id="earnedCount">0</span><span class="of">/ 55</span></div>
-    <div class="bar"><div id="barFill"></div></div>
-    <p id="progressText">0% to Platinum — 55 to go</p>
+  <div class="progress" id="progressBox" aria-label="Platinum progress">
+    <div class="big"><span id="earnedCount">0</span><span class="of">/ 55 earned</span></div>
+    <div class="bar"><div class="fill" id="progressFill" style="width:0%"></div></div>
+    <div class="countdown" id="countdown">55 trophies to the platinum</div>
   </div>
 </header>
-<nav class="tabs" id="tabs">
-  <button type="button" data-view="tracker" class="active">Tracker</button>
-  <button type="button" data-view="roadmap">Roadmap to Platinum</button>
-  <button type="button" data-view="missable">Missable trophies</button>
-  <button type="button" data-view="settings">Settings &amp; data</button>
+
+<nav class="tabs" aria-label="Views">
+  <button class="tab active" data-view="tracker" type="button">Tracker</button>
+  <button class="tab" data-view="roadmap" type="button">Platinum Roadmap</button>
+  <button class="tab" data-view="sources" type="button">Bukti &amp; Sumber</button>
+  <span class="tabnote">All 55 trophies are offline &middot; no network needed</span>
 </nav>
 
-<section id="view-tracker" class="view">
-  <div class="toolbar">
-    <input id="search" type="search" placeholder="Search a trophy…" aria-label="Search trophies">
-    <label>Grade <select id="grade"><option value="all">All grades</option><option value="platinum">Platinum</option><option value="gold">Gold</option><option value="silver">Silver</option><option value="bronze">Bronze</option></select></label>
-    <label>Kind <select id="kind"><option value="all">All kinds</option><option value="story">Story</option><option value="activities">Activities</option><option value="collectibles">Collectibles</option><option value="combat">Combat</option><option value="partner">Partner</option><option value="money">Money</option><option value="secrets">Secrets</option><option value="completion">100% completion</option><option value="platinum">Platinum</option></select></label>
-    <label>Status <select id="status"><option value="all">All</option><option value="earned">Earned</option><option value="todo">Not yet earned</option></select></label>
-    <label class="check"><input id="missableOnly" type="checkbox"> Missable only</label>
-    <label class="check" title="Hides the names and descriptions of story trophies until they are earned"><input id="spoiler" type="checkbox"> Spoiler-safe</label>
-  </div>
-  <p class="countline" id="countLine"></p>
-  <div class="split">
-    <ul class="list" id="list"></ul>
-    <aside class="detail" id="detail" aria-live="polite"></aside>
-  </div>
+<section class="toolbar" aria-label="Filters">
+  <input id="search" type="search" placeholder="Search a trophy or mission…" aria-label="Search trophies">
+  <select id="gradeFilter" aria-label="Filter by grade">
+    <option value="">All grades</option>
+    <option value="platinum">Platinum (1)</option>
+    <option value="gold">Gold (2)</option>
+    <option value="silver">Silver (6)</option>
+    <option value="bronze">Bronze (46)</option>
+  </select>
+  <select id="kindFilter" aria-label="Filter by kind">
+    <option value="">All kinds</option>
+    <option value="story">Story</option>
+    <option value="side">Side missions</option>
+    <option value="collectibles">Collectibles</option>
+    <option value="activities">Activities</option>
+    <option value="crime">Crime</option>
+    <option value="money">Money</option>
+    <option value="misc">Misc</option>
+    <option value="missable">Missable only</option>
+    <option value="online">Online (0)</option>
+  </select>
+  <label class="spoiler"><input id="spoilerToggle" type="checkbox"> Hide story spoilers</label>
+  <button id="exportBtn" type="button">Export progress</button>
+  <label class="importBtn">Import progress<input id="importFile" type="file" accept=".json,application/json" hidden></label>
+  <button id="resetBtn" type="button" class="quiet">Reset</button>
 </section>
 
-<section id="view-roadmap" class="view" hidden>
-  <h2>Roadmap to the Platinum</h2>
-  <p class="note">Built from the official trophy descriptions only. Story first, then strangers and partners, then activities and combat, then collectibles and cleanup. Chapter trophies can never be missed — missions can be replayed.</p>
-  <div id="roadmap"></div>
-</section>
-
-<section id="view-missable" class="view" hidden>
-  <h2>Missable trophies — do these before the story ends</h2>
-  <p class="note">These flags are our reading of the official descriptions, not yet confirmed in-game: the game released 19 Nov 2026. Story missions can be replayed, so chapter trophies are <strong>not</strong> missable — but partner moments and one-off stunts may not come back.</p>
-  <ul class="list wide" id="missableList"></ul>
-</section>
-
-<section id="view-settings" class="view" hidden>
-  <h2>Settings &amp; data</h2>
-  <div class="cards">
-    <div class="card">
-      <h3>Spoiler-safe mode</h3>
-      <p>When on, story trophies you have not earned yet show as “??? — hidden story trophy” instead of their name and description. Earned trophies always show in full.</p>
-      <label class="check"><input id="spoiler2" type="checkbox"> Hide un-earned story trophies</label>
+<main>
+  <section id="view-tracker" class="view">
+    <div class="split">
+      <div class="listcol">
+        <div class="listhead"><span id="listCount">55 trophies</span><span id="listHint">Click a trophy for its cited guide</span></div>
+        <ul id="trophyList" class="trophylist"></ul>
+      </div>
+      <article class="detail" id="detailPane" aria-label="Trophy guide"></article>
     </div>
-    <div class="card">
-      <h3>Save &amp; share your progress</h3>
-      <p>Progress is saved in this browser (localStorage) as you tick trophies. Export a JSON backup, or import one to restore it on another device.</p>
-      <p><button id="export" type="button">Export progress (.json)</button>
-      <label class="import">Import progress <input id="import" type="file" accept="application/json,.json"></label></p>
-      <p><button id="reset" type="button">Reset all progress</button></p>
-      <p id="saveMsg" class="muted"></p>
-    </div>
-    <div class="card">
-      <h3>Where the data comes from</h3>
-      <p>Official names, descriptions and grades: the PlayStation list as published on <a href="https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/">Exophase</a>, cross-checked against <a href="https://psnprofiles.com/trophies/43531-grand-theft-auto-vi">PSNProfiles</a> (frozen 18 Nov 2026, verified live 19 Nov 2026 — the two agree on all 55). PSN progress counts (e.g. 42 Shooting Range challenges, 250 stunts) come from PSNProfiles. Every guide is written in our own words for this entry and cites its sources beside it. No Rockstar logo or artwork is used; the look is our own. The app works fully offline — it fetches nothing.</p>
-      <p class="muted">“T**s Ass Drug Money” is shown as PlayStation publishes it.</p>
-    </div>
-  </div>
-</section>
+  </section>
 
-<footer><p>Leonida Ledger — an unofficial, open-source fan guide. Grand Theft Auto and GTA are trademarks of Take-Two Interactive; this guide is not affiliated with Rockstar Games. Trophy names and descriptions are shown as PlayStation publishes them. MIT licensed.</p></footer>
-<script type="module" src="app.js"></script>
+  <section id="view-roadmap" class="view hidden">
+    <h2>Roadmap to the platinum</h2>
+    <p class="lede">Five stages, built from the official descriptions: story first, then strangers, collectibles, activities, and the crime-and-money cleanup that ends at 100% completion.</p>
+    <div class="missableCallout" id="missableCallout"></div>
+    <div id="roadmapStages" class="stages"></div>
+  </section>
+
+  <section id="view-sources" class="view hidden">
+    <h2>Bukti &amp; Sumber — every claim cited</h2>
+    <p class="lede">A specific location or step earns no trust without a source. Every guide step below names its sources, with the date each source was published.</p>
+    <div class="evidence" id="evidenceBox"></div>
+    <table class="sources">
+      <thead><tr><th>Source</th><th>Published</th><th>Cited steps</th><th>What it backs</th></tr></thead>
+      <tbody id="sourcesTable"></tbody>
+    </table>
+    <p class="method">Method: trophy names, descriptions, grades and PSN counts come from the official list as Exophase and PSNProfiles publish it (18 Nov 2026), cross-checked against each other and against GTABase, KeenGamer, One More Game and EGamers.io. Guide steps are written in our own words for this guide; where a method is not yet confirmed in the game, the step says so plainly instead of guessing.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Vice Atlas — an unofficial fan guide. Grand Theft Auto and GTA are trademarks of Take-Two Interactive; this guide uses no Rockstar logo, artwork or game screenshots. Trophy names and descriptions are shown as PlayStation publishes them. Works fully offline; progress is saved in your browser (localStorage).</p>
+</footer>
+<script src="app.js"></script>
 </body>
 </html>

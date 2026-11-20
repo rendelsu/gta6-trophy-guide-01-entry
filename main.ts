@@ -1,13 +1,11 @@
-// Leonida Ledger — a GTA VI trophy guide and tracker (Node 22, standard library only).
-// The guide itself is plain static files under app/ (index.html, style.css, app.js and
-// data/trophies.json), served from app/ at the root, working offline with no build step.
-// This program hands it in: it copies app/ and screenshots/ from beside this file to
-// /output and writes /output/dossier.json with the vendored make.fun library, exactly
-// as the kit's starter does. Leave vendor/makefun-frontend.ts unchanged: the scorer
-// requires dossier.json to be byte for byte what its own copy of the library writes.
-// The entry is the app/ folder plus screenshots/; this file only moves them.
+// Vice Atlas hands in the GTA VI trophy guide: this program copies the guide's app/
+// and screenshots/ from beside this file to /output and writes /output/dossier.json
+// with the vendored make.fun library. The guide itself is plain static files under
+// app/ (index.html, style.css, app.js and data/trophies.json), served with no build
+// step and no network use. vendor/makefun-frontend.ts stays exactly as the kit
+// shipped it: the scorer rebuilds the dossier with its own copy and compares bytes.
 //
-// Outside the grader's container, MAKEFUN_OUTPUT_DIR stands in for /output:
+// Run it outside the grader with MAKEFUN_OUTPUT_DIR set:
 //   mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
 
 import { cpSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
@@ -23,8 +21,8 @@ cpSync(join(here, 'app'), join(out, 'app'), { recursive: true });
 mkdirSync(join(out, 'screenshots'), { recursive: true });
 if (existsSync(join(here, 'screenshots'))) cpSync(join(here, 'screenshots'), join(out, 'screenshots'), { recursive: true });
 
-// The scorer's own caps (reference/gate.json): only text_max_bytes shapes the bytes;
-// the others refuse an entry the scorer would refuse (more than 4 screenshots or one
+// The scorer's own caps: only text_max_bytes shapes the dossier bytes; the other
+// limits refuse an entry the scorer would refuse (more than 4 screenshots or one
 // over 256 KiB; more than 993 files and directories in app/ or 48 MiB of app files).
 writeFileSync(
   join(out, 'dossier.json'),
